@@ -6,7 +6,7 @@
 /*   By: fle-biha <fle-biha@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/24 11:49:57 by fle-biha          #+#    #+#             */
-/*   Updated: 2021/06/03 17:24:19 by fle-biha         ###   ########lyon.fr   */
+/*   Updated: 2021/06/04 10:52:21 by fle-biha         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,6 @@ long				ft_atol(const char *str);
 void				ft_error(void);
 void				ft_error_malloc(void);
 char				*ft_itoa_base(unsigned int n, char *base);
-int					ft_atoi_base(const char *str, int base);
+int					ft_atoi_base(char *str, char *base);
 
 #endif

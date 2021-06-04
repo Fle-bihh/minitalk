@@ -6,46 +6,86 @@
 /*   By: fle-biha <fle-biha@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 14:50:06 by fle-biha          #+#    #+#             */
-/*   Updated: 2021/06/03 15:09:54 by fle-biha         ###   ########lyon.fr   */
+/*   Updated: 2021/06/04 10:51:30 by fle-biha         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	nbr_inbase(char c, int base)
+int	ft_check_base(char *base)
 {
-	if (base <= 10)
-		return (c >= '0' && c <= '9');
-	return ((c >= '0' && c <= '9') || (c >= 'A' && c <= ('A' + base - 10)) || \
-	(c >= 'a' && c <= ('a' + base - 10)));
+	int	i;
+	int	i2;
+
+	i = 0;
+	i2 = 0;
+	while (base[i])
+	{
+		if (base[i] == '-' || base[i] == '+')
+			return (0);
+		if (base[i] == 32 || (base[i] >= 9 && base[i] <= 13))
+			return (0);
+		i2 = i + 1;
+		while (base[i2])
+		{
+			if (base[i] == base[i2])
+				return (0);
+			i2++;
+		}
+		i++;
+	}
+	if (i < 2)
+		return (0);
+	return (i);
 }
 
-int	ft_atoi_base(const char *str, int base)
+int	ft_mini_atoi(char *str, char *base, int i, int base_int)
 {
-	int		i;
-	int		nbr;
-	int		sign;
+	int			i2;
+	int			check_str;
+	long int	nbr;
 
-	if (!str[0] || (base < 2 || base > 16))
-		return (0);
+	i2 = 0;
+	check_str = 0;
 	nbr = 0;
-	sign = 1;
-	i = 0;
-	while (str[i] == '\t' || str[i] == '\v' || str[i] == '\n' || \
-		str[i] == ' ' || str[i] == '\r' || str[i] == '\f')
-		i += 1;
-	if (str[i] == '-' || str[i] == '+')
-		if (str[i++] == '-')
-			sign *= -1;
-	while (str[i] && nbr_inbase(str[i], base))
+	while (str[i])
 	{
-		if (str[i] >= 'A' && 'F' >= str[i])
-			nbr = (nbr * base) + (str[i] - 'A' + 10);
-		else if (str[i] >= 'a' && 'f' >= str[i])
-			nbr = (nbr * base) + (str[i] - 'a' + 10);
-		else
-			nbr = (nbr * base) + (str[i] - '0');
-		i += 1;
+		i2 = 0;
+		check_str = 0;
+		while (base[i2])
+		{
+			if (base[i2] == str[i])
+			{
+				nbr = nbr * base_int + i2;
+				check_str += 1;
+			}
+			i2++;
+		}
+		i++;
+		if (check_str == 0)
+			str[i] = 0;
 	}
-	return (nbr * sign);
+	return (nbr);
+}
+
+int	ft_atoi_base(char *str, char *base)
+{
+	int	i;
+	int	sign;
+	int	base_int;
+
+	i = 0;
+	sign = 1;
+	base_int = ft_check_base(base);
+	if (base_int == 0)
+		return (0);
+	while (str[i] == 32 || (str[i] >= 9 && str[i] <= 13))
+		i++;
+	while (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			sign *= -1;
+		i++;
+	}
+	return (ft_mini_atoi(str, base, i, base_int) * sign);
 }
