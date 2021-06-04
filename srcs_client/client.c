@@ -6,7 +6,7 @@
 /*   By: fle-biha <fle-biha@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 11:06:09 by fle-biha          #+#    #+#             */
-/*   Updated: 2021/06/04 09:56:24 by fle-biha         ###   ########lyon.fr   */
+/*   Updated: 2021/06/04 10:30:29 by fle-biha         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,9 @@ void	ft_send_signals(pid_t pid, char *str)
 	i = -1;
 	while (str[++i])
 	{
-		binary = ft_itoa_base(str[i], "01");
+		binary = ft_itoa_base((unsigned char) str[i], "01");
 		while (ft_strlen(binary) < 8)
 			binary = ft_strjoin("0", binary, 0, 1);
-		printf("%s\n", binary);
 		i2 = -1;
 		while (binary[++i2])
 		{

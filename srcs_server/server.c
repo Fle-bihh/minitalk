@@ -6,7 +6,7 @@
 /*   By: fle-biha <fle-biha@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 10:40:51 by fle-biha          #+#    #+#             */
-/*   Updated: 2021/06/04 09:56:25 by fle-biha         ###   ########lyon.fr   */
+/*   Updated: 2021/06/04 10:33:17 by fle-biha         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_signal_handler(int sig)
 	if (i == 8)
 	{
 		letter[i] = '\0';
-		ft_atoi_base(letter, 2);
+		ft_putchar_fd(ft_atoi_base(letter, 2), 1);
 		i = 0;
 	}
 }
